@@ -1,0 +1,106 @@
+Débogage des erreurs 404 dans wp-admin
+1. Contenu du .htaccess sur le serveur
+Fichier .htaccess trouvé
+
+✓ Pas de blocage plugins
+
+✓ Pas de blocage thèmes
+
+✓ Pas de blocage wp-admin/includes
+
+Contenu complet du .htaccess:
+# BEGIN iThemes Security - Ne modifiez pas ou ne supprimez pas cette ligne
+# iThemes Security Config Details: 2
+	# Protéger les fichiers système - Solid Security > Réglages > Ajustements système > Fichiers système
+	<files .htaccess>
+		Order allow,deny
+		Deny from all
+	</files>
+	<files readme.html>
+		Order allow,deny
+		Deny from all
+	</files>
+	<files readme.txt>
+		Order allow,deny
+		Deny from all
+	</files>
+	<files wp-config.php>
+		Order allow,deny
+		Deny from all
+	</files>
+
+	# Désactiver l’exploration des répertoires - Solid Security > Réglages > Ajustements système > Exploration des répertoires
+	Options -Indexes
+
+	<IfModule mod_rewrite.c>
+		RewriteEngine On
+
+		# Bloquer les fichiers git/svn
+		RewriteCond %{REQUEST_FILENAME} -f
+		RewriteRule (^|.*/)\.(git|svn)/.* - [F]
+
+		# Désactiver PHP dans le répertoire « Uploads » - Solid Security > Réglages > Ajustements système > PHP dans Uploads
+		RewriteRule ^wp\-content/uploads/.*\.(?:php[1-7]?|pht|phtml?|phps)\.?$ - [NC,F]
+	</IfModule>
+
+	# Désactiver XML-RPC - Solid Security > Réglages > Ajustements WordPress > XML-RPC
+	<files xmlrpc.php>
+		Order allow,deny
+		Deny from all
+	</files>
+# END iThemes Security - Ne modifiez pas ou ne supprimez pas cette ligne
+
+# BEGIN WordPress
+# Les directives (lignes) entre « BEGIN WordPress » et « END WordPress » sont générées
+# dynamiquement, et doivent être modifiées uniquement via les filtres WordPress.
+# Toute modification des directives situées entre ces marqueurs sera surchargée.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+2. Test des URLs
+Type	URL	Test
+Admin principal	https://leec.ci/wp-admin/	Tester
+Liste des pages	https://leec.ci/wp-admin/edit.php?post_type=page	Tester
+Liste des articles	https://leec.ci/wp-admin/edit.php	Tester
+Nouvelle page	https://leec.ci/wp-admin/post-new.php?post_type=page	Tester
+Réglages	https://leec.ci/wp-admin/options-general.php	Tester
+3. Configuration des permaliens
+Structure des permaliens: /%postname%/
+
+✓ Règles de réécriture présentes (210 règles)
+
+4. Plugins de sécurité actifs
+Plugins de sécurité détectés:
+
+better-wp-security/better-wp-security.php
+⚠ Ces plugins peuvent avoir des règles de sécurité qui bloquent certaines pages.
+
+5. Configuration PHP
+Affichage des erreurs: Désactivé
+
+WP_DEBUG: Désactivé
+
+6. Informations serveur
+Serveur: Apache
+
+Document Root: /home/leecci/public_html
+
+7. Test mod_rewrite
+Si les permaliens fonctionnent, mod_rewrite est actif.
+
+Structure actuelle: Permaliens personnalisés (mod_rewrite requis)
+
+Actions recommandées:
+Si le .htaccess contient encore des règles bloquantes: Remplacez-le par la version corrigée
+Si les règles de réécriture sont vides: Allez dans Réglages > Permaliens et enregistrez
+Testez les URLs ci-dessus pour identifier quelle page pose problème
+Vérifiez les logs d'erreur de votre hébergeur pour plus de détails
+Supprimez ce fichier après utilisation!

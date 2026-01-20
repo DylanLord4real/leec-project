@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1B9BD8 0%, #F0FAFF 100%);
+    /* background-color: #F0FAFF; */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    max-width: 300px;
+    height: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.applications-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.app-card {
+    background: white;
+    border-radius: 15px;
+    padding: 0;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.app-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+}
+
+.app-card:hover .app-content {
+    opacity: 0;
+}
+
+.app-logo {
+    width: 60px;
+    height: 60px;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.app-content h2 {
+    font-size: 1.3rem;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.app-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.app-card:hover .app-overlay {
+    opacity: 1;
+}
+
+.app-overlay h3 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.app-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn-link {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #F47920 0%, #E67E22 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(244, 121, 32, 0.3);
+}
+
+.btn-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(244, 121, 32, 0.5);
+}
+
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: white;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid white;
+    transition: opacity 0.3s ease;
+}
+
+footer a:hover {
+    opacity: 0.8;
+}
+
+/* Couleurs personnalisées pour chaque carte */
+.app-card-erp {
+    background: linear-gradient(135deg, #1B9BD8 0%, #0B8FD0 100%);
+}
+
+.app-card-mail {
+    background: linear-gradient(135deg, #7CB342 0%, #558B2F 100%);
+}
+
+.app-card-ged {
+    background: linear-gradient(135deg, #26C6DA 0%, #00ACC1 100%);
+}
+
+.app-card-zoom {
+    background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+}
+
+.app-card-asana {
+    background: linear-gradient(135deg, #AB47BC 0%, #8E24AA 100%);
+}
+
+.app-card-slack {
+    background: linear-gradient(135deg, #FDD835 0%, #F9A825 100%);
+}
+
+@media (max-width: 768px) {
+    .logo {
+        max-width: 200px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .applications-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .applications-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
